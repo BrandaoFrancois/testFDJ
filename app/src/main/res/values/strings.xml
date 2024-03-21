@@ -2,5 +2,4 @@
     <string name="app_name">TestFDJ</string>
 
     <string name="searchtool_label">Rechercher une league</string>
-    <string name="default_searchtoolbar_value"></string>
 </resources>

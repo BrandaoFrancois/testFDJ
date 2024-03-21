@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.test.fdj.data.TeamElement
@@ -17,14 +16,16 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    savedStateHandle: SavedStateHandle,
     private val teamService: TeamService
 ): ViewModel() {
+    companion object {
+        val TAG_NAME = MainViewModel::class.simpleName
+    }
 
     private val _leagues : MutableState<List<String>> = mutableStateOf(listOf())
     val leagues: State<List<String>> get() = _leagues
 
-    private val _teams : MutableState<List<TeamElement>> = mutableStateOf(listOf());
+    private val _teams : MutableState<List<TeamElement>> = mutableStateOf(listOf())
     val teams: State<List<TeamElement>> get() = _teams
 
     private val _isTeamsVisible : MutableState<Boolean> = mutableStateOf(false)
@@ -43,7 +44,7 @@ class MainViewModel @Inject constructor(
                 _leagues.value = leagues
                 _isTeamsVisible.value = false
             } catch(exception: IOException) {
-                Log.e("ERROR", "Big error ! ${exception.message}")
+                Log.e(TAG_NAME, "Error during updating leagues: ${exception.message}")
                 // TODO Faire quelque chose
             }
         }
@@ -59,6 +60,7 @@ class MainViewModel @Inject constructor(
                 _isTeamsVisible.value = true
 
             } catch(exception: IOException) {
+                Log.e(TAG_NAME, "Error during selecting a league: ${exception.message}")
                 // TODO Faire quelque chose
             }
         }

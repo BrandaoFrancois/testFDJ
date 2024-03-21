@@ -1,8 +1,8 @@
-package com.test.fdj.api
+package com.test.fdj.provider
 
 import com.test.fdj.data.TeamElement
 import com.test.fdj.hilt.DefaultDispatcher
-import com.test.fdj.provider.SportsDataProvider
+import com.test.fdj.module.sportsdb.SportsDBService
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject

@@ -1,4 +1,4 @@
-package com.test.fdj.api
+package com.test.fdj.module.sportsdb.data
 
 import com.google.gson.annotations.SerializedName
 

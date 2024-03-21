@@ -24,11 +24,18 @@ android {
 
     buildTypes {
         release {
+            buildConfigField("String", "SPORTSDB_BASE_URL", "\"https://www.thesportsdb.com/api/v1/json/\"")
+            buildConfigField("String", "SPORTSDB_API_KEY", "\"50130162\"")
+
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+        }
+        debug {
+            buildConfigField("String", "SPORTSDB_BASE_URL", "\"https://www.thesportsdb.com/api/v1/json/\"")
+            buildConfigField("String", "SPORTSDB_API_KEY", "\"50130162\"")
         }
     }
     compileOptions {
@@ -40,6 +47,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
@@ -56,6 +64,9 @@ dependencies {
     val versionOkHTTP = "4.12.0"
     val versionHilt = "2.48"
     val versionCoil = "2.6.0"
+    val versionCoroutine = "1.7.3"
+    val versionMockitoCore = "5.10.0"
+    val versionMockitoKotlinVersion = "5.3.0"
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
@@ -92,6 +103,8 @@ dependencies {
     implementation("io.coil-kt:coil:$versionCoil")
     implementation("io.coil-kt:coil-compose:$versionCoil")
 
+    // Coroutine Test
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$versionCoroutine")
 }
 
 kapt {

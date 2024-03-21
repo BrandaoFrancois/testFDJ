@@ -14,20 +14,22 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.test.fdj.MainViewModel
+import com.test.fdj.provider.SportsDataProviderSportsDBImpl
 import com.test.fdj.compose.items.SearchToolBar
 import com.test.fdj.data.TeamElement
+import com.test.fdj.service.TeamServiceImpl
 import com.test.fdj.ui.theme.TestFDJTheme
+import kotlinx.coroutines.Dispatchers
 
 @Composable
 fun MainScreen(
-    viewModel: MainViewModel = hiltViewModel(),
-    modifier: Modifier = Modifier
+    viewModel: MainViewModel = hiltViewModel()
 ) {
     Column {
         SearchToolBar(
             categories = viewModel.leagues,
             onCategoriesUpdateNeeded = { input -> viewModel.updateLeagues(input) },
-            onSelectCategorie = { categorieSelected -> viewModel.selectLeague(categorieSelected) },
+            onSelectCategory = { categorySelected -> viewModel.selectLeague(categorySelected) },
             text = viewModel.searchLabelText
         )
         if (viewModel.isTeamsVisible.value) {
@@ -50,7 +52,9 @@ fun LeagueList(leaguePictures: State<List<TeamElement>>) {
 @Preview(showSystemUi = true)
 @Composable
 fun MainScreenPreview() {
+    val viewModel = MainViewModel(TeamServiceImpl(SportsDataProviderSportsDBImpl(Dispatchers.Default)))
+
     TestFDJTheme {
-        MainScreen()
+        MainScreen(viewModel)
     }
 }

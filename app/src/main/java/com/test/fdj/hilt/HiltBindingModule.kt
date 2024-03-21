@@ -1,6 +1,6 @@
 package com.test.fdj.hilt
 
-import com.test.fdj.api.SportsDataProviderSportsDBImpl
+import com.test.fdj.provider.SportsDataProviderSportsDBImpl
 import com.test.fdj.provider.SportsDataProvider
 import com.test.fdj.service.TeamService
 import com.test.fdj.service.TeamServiceImpl
