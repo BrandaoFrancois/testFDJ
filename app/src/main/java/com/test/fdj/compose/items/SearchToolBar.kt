@@ -37,7 +37,7 @@ fun SearchToolBar(
     categories: State<List<String>>,
     text: MutableState<String>,
     onCategoriesUpdateNeeded: (String) -> Unit = {},
-    onSelectCategorie: (String) -> Unit = {},
+    onSelectCategory: (String) -> Unit = {},
     autoCompleteDefaultValue: Boolean = false
 ) {
     var isAutoCompleteVisible by remember { mutableStateOf(autoCompleteDefaultValue) }
@@ -73,12 +73,12 @@ fun SearchToolBar(
         )
         if (isAutoCompleteVisible) {
             LazyColumn {
-                items(categories.value) { categorie ->
+                items(categories.value) { category ->
                     ClickableText(
-                        text = AnnotatedString(categorie),
+                        text = AnnotatedString(category),
                         onClick = {
-                            text.value = categorie
-                            onSelectCategorie(categorie)
+                            text.value = category
+                            onSelectCategory(category)
                             isAutoCompleteVisible = false
                             focusManager.clearFocus()
                           },
@@ -96,8 +96,8 @@ fun SearchToolBar(
 
 @Preview(showBackground = true)
 @Composable
-fun MainScreenPreview() {
-    val exempleList = remember { mutableStateOf(listOf(
+fun SearchToolBarPreview() {
+    val exampleList = remember { mutableStateOf(listOf(
         "Solution 1",
         "Solution 2",
         "Solution 3"
@@ -106,7 +106,7 @@ fun MainScreenPreview() {
 
     TestFDJTheme {
         SearchToolBar(
-            categories = exempleList,
+            categories = exampleList,
             text = text,
             autoCompleteDefaultValue = true
         )

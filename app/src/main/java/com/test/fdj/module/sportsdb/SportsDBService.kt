@@ -1,5 +1,8 @@
-package com.test.fdj.api
+package com.test.fdj.module.sportsdb
 
+import com.test.fdj.BuildConfig
+import com.test.fdj.module.sportsdb.data.AllLeagueResult
+import com.test.fdj.module.sportsdb.data.SearchTeamResult
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -17,8 +20,8 @@ interface SportsDBService {
     ) : SearchTeamResult
 
     companion object {
-        private const val BASE_URL = "https://www.thesportsdb.com/api/v1/json/"
-        private const val API_KEY = "50130162"
+        private const val BASE_URL = BuildConfig.SPORTSDB_BASE_URL
+        private const val API_KEY = BuildConfig.SPORTSDB_API_KEY
 
         fun create() : SportsDBService {
             val logger = HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC }
