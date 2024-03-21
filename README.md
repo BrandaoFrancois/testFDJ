@@ -2,9 +2,11 @@
 
 Little application developed for a job interview.
 
+<h3>
 <img src="https://github.com/BrandaoFrancois/testFDJ/blob/main/README_ASSETS/screen1.png?raw=true" width="150" />
 <img src="https://github.com/BrandaoFrancois/testFDJ/blob/main/README_ASSETS/screen2.png?raw=true" width="150" />
 <img src="https://github.com/BrandaoFrancois/testFDJ/blob/main/README_ASSETS/screen3.png?raw=true" width="150" />
+</h3>
 
 ## Technical stack
 
