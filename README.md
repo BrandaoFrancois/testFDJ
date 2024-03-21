@@ -2,6 +2,8 @@
 
 Little application developed for a job interview.
 
+![alt screen](https://github.com/BrandaoFrancois/testFDJ/blob/main/README_ASSETS/screen1.png?raw=true)
+
 ## Technical stack
 
   - Android Kotlin Application / MVVM
