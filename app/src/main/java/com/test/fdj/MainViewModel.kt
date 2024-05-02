@@ -7,7 +7,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.test.fdj.data.TeamElement
-import com.test.fdj.service.TeamService
+import com.test.fdj.usecase.GetLeaguesFilteredByUseCase
+import com.test.fdj.usecase.GetOddTeamListForLeagueSortedAnalphabeticalyUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -16,7 +17,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val teamService: TeamService
+    private val getLeaguesFilteredByUseCase : GetLeaguesFilteredByUseCase,
+    private val getOddTeamListForLeagueSortedAnalphabeticalyUseCase: GetOddTeamListForLeagueSortedAnalphabeticalyUseCase
 ): ViewModel() {
     companion object {
         val TAG_NAME = MainViewModel::class.simpleName
@@ -39,7 +41,7 @@ class MainViewModel @Inject constructor(
         updateLeaguesJob?.cancel()
         updateLeaguesJob = viewModelScope.launch {
             try {
-                val leagues: List<String> = teamService.getLeaguesFilteredBy(input)
+                val leagues: List<String> = getLeaguesFilteredByUseCase.execute(input)
 
                 _leagues.value = leagues
                 _isTeamsVisible.value = false
@@ -53,8 +55,7 @@ class MainViewModel @Inject constructor(
     fun selectLeague(leagueName: String) {
         viewModelScope.launch {
             try {
-                val teamsElement: List<TeamElement> =
-                    teamService.getOddTeamListForLeagueSortedAnalphabeticaly(leagueName)
+                val teamsElement: List<TeamElement> = getOddTeamListForLeagueSortedAnalphabeticalyUseCase.execute(leagueName)
 
                 _teams.value = teamsElement // A mettre sur la Main Thread
                 _isTeamsVisible.value = true
