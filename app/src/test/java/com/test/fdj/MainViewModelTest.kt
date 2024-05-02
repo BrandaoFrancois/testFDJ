@@ -1,7 +1,8 @@
 package com.test.fdj
 
 import com.test.fdj.data.TeamElement
-import com.test.fdj.service.TeamService
+import com.test.fdj.usecase.GetLeaguesFilteredByUseCase
+import com.test.fdj.usecase.GetOddTeamListForLeagueSortedAnalphabeticalyUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
@@ -14,22 +15,26 @@ import java.io.IOException
 
 class MainViewModelTest {
 
-    val crashTeamService = object : TeamService {
-        override suspend fun getOddTeamListForLeagueSortedAnalphabeticaly(leagueName: String): List<TeamElement> {
+    val crashGetOddUseCase = object: GetOddTeamListForLeagueSortedAnalphabeticalyUseCase {
+        override suspend fun execute(leagueName: String): List<TeamElement> {
             throw IOException("No no ! Not working today ! Come tomorrow !")
         }
+    }
 
-        override suspend fun getLeaguesFilteredBy(input: String): List<String> {
+    val crashGetLeaguesUseCase = object: GetLeaguesFilteredByUseCase {
+        override suspend fun execute(input: String): List<String> {
             throw IOException("No no ! Still not working today ! Come tomorrow !")
         }
     }
 
-    val emptyTeamService = object : TeamService {
-        override suspend fun getOddTeamListForLeagueSortedAnalphabeticaly(leagueName: String): List<TeamElement> {
+    val emptyGetOddUseCase = object: GetOddTeamListForLeagueSortedAnalphabeticalyUseCase {
+        override suspend fun execute(leagueName: String): List<TeamElement> {
             return listOf()
         }
+    }
 
-        override suspend fun getLeaguesFilteredBy(input: String): List<String> {
+    val emptyGetLeaguesUseCase = object: GetLeaguesFilteredByUseCase {
+        override suspend fun execute(input: String): List<String> {
             return listOf()
         }
     }
@@ -38,7 +43,7 @@ class MainViewModelTest {
     @Test
     fun testUpdateLeaguesCatchErrorsWithNoChange() = runTest {
         val leagueFilter = ""
-        val mainViewModel = MainViewModel(crashTeamService)
+        val mainViewModel = MainViewModel(crashGetLeaguesUseCase, crashGetOddUseCase)
         val testDispatcher = UnconfinedTestDispatcher(testScheduler)
 
         Dispatchers.setMain(testDispatcher)
@@ -55,7 +60,7 @@ class MainViewModelTest {
     @Test
     fun testSelectLeagueCatchErrorsWithNoChange() = runTest {
         val leagueToSelect = ""
-        val mainViewModel = MainViewModel(crashTeamService)
+        val mainViewModel = MainViewModel(crashGetLeaguesUseCase, crashGetOddUseCase)
         val testDispatcher = UnconfinedTestDispatcher(testScheduler)
 
         Dispatchers.setMain(testDispatcher)
@@ -72,7 +77,7 @@ class MainViewModelTest {
     @Test
     fun testSelectLeagueTeamsVisibilityGoTrue() = runTest {
         val leagueToSelect = ""
-        val mainViewModel = MainViewModel(emptyTeamService)
+        val mainViewModel = MainViewModel(emptyGetLeaguesUseCase, emptyGetOddUseCase)
         val testDispatcher = UnconfinedTestDispatcher(testScheduler)
 
         Dispatchers.setMain(testDispatcher)
@@ -91,7 +96,7 @@ class MainViewModelTest {
     @Test
     fun testUpdateLeaguesTeamsVisibilityGoFalse() = runTest {
         val leagueToSelect = ""
-        val mainViewModel = MainViewModel(emptyTeamService)
+        val mainViewModel = MainViewModel(emptyGetLeaguesUseCase, emptyGetOddUseCase)
         val testDispatcher = UnconfinedTestDispatcher(testScheduler)
 
         Dispatchers.setMain(testDispatcher)

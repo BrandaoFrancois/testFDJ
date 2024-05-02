@@ -17,8 +17,9 @@ import com.test.fdj.MainViewModel
 import com.test.fdj.provider.SportsDataProviderSportsDBImpl
 import com.test.fdj.compose.items.SearchToolBar
 import com.test.fdj.data.TeamElement
-import com.test.fdj.service.TeamServiceImpl
 import com.test.fdj.ui.theme.TestFDJTheme
+import com.test.fdj.usecase.GetLeaguesFilteredByUseCaseImpl
+import com.test.fdj.usecase.GetOddTeamListForLeagueSortedAnalphabeticalyUseCaseImpl
 import kotlinx.coroutines.Dispatchers
 
 @Composable
@@ -52,7 +53,11 @@ fun LeagueList(leaguePictures: State<List<TeamElement>>) {
 @Preview(showSystemUi = true)
 @Composable
 fun MainScreenPreview() {
-    val viewModel = MainViewModel(TeamServiceImpl(SportsDataProviderSportsDBImpl(Dispatchers.Default)))
+    val sportsDataProviderSportsDB = SportsDataProviderSportsDBImpl(Dispatchers.Default)
+    val viewModel = MainViewModel(
+        GetLeaguesFilteredByUseCaseImpl(sportsDataProviderSportsDB),
+        GetOddTeamListForLeagueSortedAnalphabeticalyUseCaseImpl(sportsDataProviderSportsDB)
+    )
 
     TestFDJTheme {
         MainScreen(viewModel)

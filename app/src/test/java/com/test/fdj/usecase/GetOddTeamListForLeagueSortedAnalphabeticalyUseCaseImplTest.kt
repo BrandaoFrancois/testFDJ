@@ -1,4 +1,4 @@
-package com.test.fdj.service
+package com.test.fdj.usecase
 
 import com.test.fdj.data.TeamElement
 import com.test.fdj.provider.SportsDataProvider
@@ -10,8 +10,7 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Assert
 import org.junit.Test
 
-class TeamServiceImplTest {
-
+class GetOddTeamListForLeagueSortedAnalphabeticalyUseCaseImplTest {
     private val sportsDataProvider = object: SportsDataProvider {
         override suspend fun provideTeamsOfLeague(leagueName: String): List<TeamElement> {
             return listOf(
@@ -45,50 +44,15 @@ class TeamServiceImplTest {
     fun testGettingOddTeamListForLeagueSortedAnalphabeticaly() = runTest {
         val leagueNameToTest = ""
         val testDispatcher = UnconfinedTestDispatcher(testScheduler)
-        val testService = TeamServiceImpl(sportsDataProvider, testDispatcher)
+        val testUseCase = GetOddTeamListForLeagueSortedAnalphabeticalyUseCaseImpl(sportsDataProvider, testDispatcher)
         lateinit var resultToTestFormatted : String
 
         launch {
-            val resultToTest = testService.getOddTeamListForLeagueSortedAnalphabeticaly(leagueNameToTest)
+            val resultToTest = testUseCase.execute(leagueNameToTest)
             resultToTestFormatted = resultToTest.joinToString(separator = "") { it.name }
         }
         advanceUntilIdle()
 
         Assert.assertEquals("GECA", resultToTestFormatted)
     }
-
-    @OptIn(ExperimentalCoroutinesApi::class)
-    @Test
-    fun testGettingLeaguesFilteredByWithCaseInsensitive() = runTest {
-        val filterString = "eN"
-        val testDispatcher = UnconfinedTestDispatcher(testScheduler)
-        val testService = TeamServiceImpl(sportsDataProvider, testDispatcher)
-        lateinit var resultToTestFormatted : String
-
-        launch {
-            val resultToTest = testService.getLeaguesFilteredBy(filterString)
-            resultToTestFormatted = resultToTest.joinToString(separator = "") { it }
-        }
-        advanceUntilIdle()
-
-        Assert.assertEquals("englandEnglandENgland", resultToTestFormatted)
-    }
-
-    @OptIn(ExperimentalCoroutinesApi::class)
-    @Test
-    fun testGettingLeaguesFilteredByWithNormalString() = runTest {
-        val filterString = "alpha"
-        val testDispatcher = UnconfinedTestDispatcher(testScheduler)
-        val testService = TeamServiceImpl(sportsDataProvider, testDispatcher)
-        lateinit var resultToTestFormatted : String
-
-        launch {
-            val resultToTest = testService.getLeaguesFilteredBy(filterString)
-            resultToTestFormatted = resultToTest.joinToString(separator = "") { it }
-        }
-        advanceUntilIdle()
-
-        Assert.assertEquals("alphaalphabet", resultToTestFormatted)
-    }
-
 }
