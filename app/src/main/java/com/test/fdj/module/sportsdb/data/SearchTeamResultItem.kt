@@ -5,6 +5,6 @@ import com.google.gson.annotations.SerializedName
 data class SearchTeamResultItem(
     @SerializedName("strTeam")
     val name: String,
-    @SerializedName("strTeamBadge")
+    @SerializedName("strBadge")
     val teamBadge: String
 )

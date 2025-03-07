@@ -25,7 +25,7 @@ android {
     buildTypes {
         release {
             buildConfigField("String", "SPORTSDB_BASE_URL", "\"https://www.thesportsdb.com/api/v1/json/\"")
-            buildConfigField("String", "SPORTSDB_API_KEY", "\"50130162\"")
+            buildConfigField("String", "SPORTSDB_API_KEY", "\"3\"")
 
             isMinifyEnabled = false
             proguardFiles(
@@ -35,7 +35,7 @@ android {
         }
         debug {
             buildConfigField("String", "SPORTSDB_BASE_URL", "\"https://www.thesportsdb.com/api/v1/json/\"")
-            buildConfigField("String", "SPORTSDB_API_KEY", "\"50130162\"")
+            buildConfigField("String", "SPORTSDB_API_KEY", "\"3\"")
         }
     }
     compileOptions {
