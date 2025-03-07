@@ -50,7 +50,7 @@ android {
         buildConfig = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.13"
     }
     packaging {
         resources {
@@ -65,8 +65,6 @@ dependencies {
     val versionHilt = "2.48"
     val versionCoil = "2.6.0"
     val versionCoroutine = "1.7.3"
-    val versionMockitoCore = "5.10.0"
-    val versionMockitoKotlinVersion = "5.3.0"
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
