@@ -1,7 +1,7 @@
 package com.test.fdj.provider
 
 import com.test.fdj.data.TeamElement
-import com.test.fdj.hilt.DefaultDispatcher
+import com.test.fdj.di.DefaultDispatcher
 import com.test.fdj.module.sportsdb.SportsDBService
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext

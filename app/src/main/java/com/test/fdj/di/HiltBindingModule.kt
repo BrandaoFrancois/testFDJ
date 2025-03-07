@@ -1,4 +1,4 @@
-package com.test.fdj.hilt
+package com.test.fdj.di
 
 import com.test.fdj.provider.SportsDataProviderSportsDBImpl
 import com.test.fdj.provider.SportsDataProvider

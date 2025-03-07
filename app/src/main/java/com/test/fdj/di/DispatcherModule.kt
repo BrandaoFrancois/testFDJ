@@ -1,4 +1,4 @@
-package com.test.fdj.hilt
+package com.test.fdj.di
 
 import dagger.Module
 import dagger.Provides

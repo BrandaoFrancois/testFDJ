@@ -1,7 +1,7 @@
 package com.test.fdj.usecase
 
 import com.test.fdj.data.TeamElement
-import com.test.fdj.hilt.DefaultDispatcher
+import com.test.fdj.di.DefaultDispatcher
 import com.test.fdj.provider.SportsDataProvider
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers

@@ -1,4 +1,4 @@
-package com.test.fdj.compose
+package com.test.fdj.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -15,7 +15,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.test.fdj.MainViewModel
 import com.test.fdj.provider.SportsDataProviderSportsDBImpl
-import com.test.fdj.compose.items.SearchToolBar
+import com.test.fdj.ui.items.SearchToolBar
 import com.test.fdj.data.TeamElement
 import com.test.fdj.ui.theme.TestFDJTheme
 import com.test.fdj.usecase.GetLeaguesFilteredByUseCaseImpl

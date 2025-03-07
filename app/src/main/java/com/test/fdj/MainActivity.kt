@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import com.test.fdj.compose.MainScreen
+import com.test.fdj.ui.MainScreen
 import com.test.fdj.ui.theme.TestFDJTheme
 import dagger.hilt.android.AndroidEntryPoint
 

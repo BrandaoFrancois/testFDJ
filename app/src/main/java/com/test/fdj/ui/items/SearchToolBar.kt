@@ -1,4 +1,4 @@
-package com.test.fdj.compose.items
+package com.test.fdj.ui.items
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
