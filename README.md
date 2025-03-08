@@ -2,6 +2,10 @@
 
 Little application developed for a job interview.
 
+The subject were: 
+  - The user can search for a soccer league (with auto-completion)
+  - The user can select a soccer league to view the teams (filtering half of them) participating, sorted in reverse alphabetical order. 
+
 <h3>
 <img src="https://github.com/BrandaoFrancois/testFDJ/blob/main/README_ASSETS/screen1.png?raw=true" width="150" />
 <img src="https://github.com/BrandaoFrancois/testFDJ/blob/main/README_ASSETS/screen2.png?raw=true" width="150" />
