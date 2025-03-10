@@ -11,48 +11,48 @@ import org.junit.Assert
 import org.junit.Test
 
 class GetOddTeamListForLeagueSortedAnalphabeticalyUseCaseImplTest {
-    private val sportsDataRepository = object: SportsDataRepository {
-        override suspend fun getTeamsOfLeague(leagueName: String): List<TeamElement> {
-            return listOf(
-                TeamElement("A", ""),
-                TeamElement("B", ""),
-                TeamElement("C", ""),
-                TeamElement("D", ""),
-                TeamElement("E", ""),
-                TeamElement("F", ""),
-                TeamElement("G", "")
-            )
-        }
+    private val sportsDataRepository =
+        object : SportsDataRepository {
+            override suspend fun getTeamsOfLeague(leagueName: String) =
+                listOf(
+                    TeamElement("A", ""),
+                    TeamElement("B", ""),
+                    TeamElement("C", ""),
+                    TeamElement("D", ""),
+                    TeamElement("E", ""),
+                    TeamElement("F", ""),
+                    TeamElement("G", ""),
+                )
 
-        override suspend fun getLeagues(): List<String> {
-            return listOf(
-                "a",
-                "alpa",
-                "alpha",
-                "alphabet",
-                "b",
-                "ba",
-                "england",
-                "England",
-                "ENgland"
-            )
-        }
+            override suspend fun getLeagues() =
+                listOf(
+                    "a",
+                    "alpa",
+                    "alpha",
+                    "alphabet",
+                    "b",
+                    "ba",
+                    "england",
+                    "England",
+                    "ENgland",
+                )
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
-    fun testGettingOddTeamListForLeagueSortedAnalphabeticaly() = runTest {
-        val leagueNameToTest = ""
-        val testDispatcher = UnconfinedTestDispatcher(testScheduler)
-        val testUseCase = GetOddTeamListForLeagueSortedAnalphabeticalyUseCaseImpl(sportsDataRepository, testDispatcher)
-        lateinit var resultToTestFormatted : String
+    fun testGettingOddTeamListForLeagueSortedAnalphabeticaly() =
+        runTest {
+            val leagueNameToTest = ""
+            val testDispatcher = UnconfinedTestDispatcher(testScheduler)
+            val testUseCase = GetOddTeamListForLeagueSortedAnalphabeticalyUseCaseImpl(sportsDataRepository, testDispatcher)
+            lateinit var resultToTestFormatted: String
 
-        launch {
-            val resultToTest = testUseCase.execute(leagueNameToTest)
-            resultToTestFormatted = resultToTest.joinToString(separator = "") { it.name }
+            launch {
+                val resultToTest = testUseCase.execute(leagueNameToTest)
+                resultToTestFormatted = resultToTest.joinToString(separator = "") { it.name }
+            }
+            advanceUntilIdle()
+
+            Assert.assertEquals("GECA", resultToTestFormatted)
         }
-        advanceUntilIdle()
-
-        Assert.assertEquals("GECA", resultToTestFormatted)
-    }
 }

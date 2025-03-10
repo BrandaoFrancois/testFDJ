@@ -15,11 +15,13 @@ import dagger.hilt.android.components.ViewModelComponent
 @InstallIn(ViewModelComponent::class)
 abstract class HiltBindingModule {
     @Binds
-    abstract fun bindSportsDataProvider(sportsDataProvider: SportsDataRepositorySportsDBImpl) : SportsDataRepository
+    abstract fun bindSportsDataProvider(sportsDataProvider: SportsDataRepositorySportsDBImpl): SportsDataRepository
 
     @Binds
-    abstract fun bindGetOddTeamListForLeagueSortedAnalphabeticalyUseCaseImpl(getOddTeamListForLeagueSortedAnalphabeticalyUseCaseImpl: GetOddTeamListForLeagueSortedAnalphabeticalyUseCaseImpl) : GetOddTeamListForLeagueSortedAnalphabeticalyUseCase
+    abstract fun bindGetOddTeamListForLeagueSortedAnalphabeticalyUseCaseImpl
+                (getOddTeamListForLeagueSortedAnalphabeticalyUseCaseImpl: GetOddTeamListForLeagueSortedAnalphabeticalyUseCaseImpl)
+    : GetOddTeamListForLeagueSortedAnalphabeticalyUseCase
 
     @Binds
-    abstract fun bindGetLeaguesFilteredByUseCase(getLeaguesFilteredByUseCase: GetLeaguesFilteredByUseCaseImpl) : GetLeaguesFilteredByUseCase
+    abstract fun bindGetLeaguesFilteredByUseCase(getLeaguesFilteredByUseCase: GetLeaguesFilteredByUseCaseImpl): GetLeaguesFilteredByUseCase
 }

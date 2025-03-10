@@ -17,25 +17,25 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val getLeaguesFilteredByUseCase : GetLeaguesFilteredByUseCase,
+    private val getLeaguesFilteredByUseCase: GetLeaguesFilteredByUseCase,
     private val getOddTeamListForLeagueSortedAnalphabeticalyUseCase: GetOddTeamListForLeagueSortedAnalphabeticalyUseCase
 ): ViewModel() {
     companion object {
         val TAG_NAME = MainViewModel::class.simpleName
     }
 
-    private val _leagues : MutableState<List<String>> = mutableStateOf(listOf())
+    private val _leagues: MutableState<List<String>> = mutableStateOf(listOf())
     val leagues: State<List<String>> get() = _leagues
 
-    private val _teams : MutableState<List<TeamElement>> = mutableStateOf(listOf())
+    private val _teams: MutableState<List<TeamElement>> = mutableStateOf(listOf())
     val teams: State<List<TeamElement>> get() = _teams
 
-    private val _isTeamsVisible : MutableState<Boolean> = mutableStateOf(false)
+    private val _isTeamsVisible: MutableState<Boolean> = mutableStateOf(false)
     val isTeamsVisible: State<Boolean> get() = _isTeamsVisible
 
-    val searchLabelText : MutableState<String> = mutableStateOf("")
+    val searchLabelText: MutableState<String> = mutableStateOf("")
 
-    private var updateLeaguesJob : Job? = null
+    private var updateLeaguesJob: Job? = null
 
     fun updateLeagues(input: String) {
         updateLeaguesJob?.cancel()

@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class SearchTeamResult (
     @SerialName("teams")
-    val teams : List<SearchTeamResultItem>
+    val teams: List<SearchTeamResultItem>
 )

@@ -14,7 +14,7 @@ import retrofit2.http.Query
 
 interface SportsDBService {
     @GET("$API_KEY/all_leagues.php")
-    suspend fun getListOfAllLeagues() : AllLeagueResult
+    suspend fun getListOfAllLeagues(): AllLeagueResult
 
     @GET("$API_KEY/search_all_teams.php")
     suspend fun searchTeams(
@@ -30,7 +30,7 @@ interface SportsDBService {
 
             val client = OkHttpClient.Builder()
                 .addInterceptor(logger)
-                .build();
+                .build()
 
             val networkJson = Json { ignoreUnknownKeys = true }
 
