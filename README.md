@@ -7,9 +7,9 @@ The subject were:
   - The user can select a soccer league to view the teams (filtering half of them) participating, sorted in reverse alphabetical order. 
 
 <h3>
-<img src="https://github.com/BrandaoFrancois/testFDJ/blob/main/README_ASSETS/screen1.png?raw=true" width="150" />
-<img src="https://github.com/BrandaoFrancois/testFDJ/blob/main/README_ASSETS/screen2.png?raw=true" width="150" />
-<img src="https://github.com/BrandaoFrancois/testFDJ/blob/main/README_ASSETS/screen3.png?raw=true" width="150" />
+<img alt="List league screen" src="https://github.com/BrandaoFrancois/testFDJ/blob/main/README_ASSETS/screen1.png?raw=true" width="150" />
+<img alt="List teams on league screen" src="https://github.com/BrandaoFrancois/testFDJ/blob/main/README_ASSETS/screen2.png?raw=true" width="150" />
+<img alt="List teams on league screen horizontally" src="https://github.com/BrandaoFrancois/testFDJ/blob/main/README_ASSETS/screen3.png?raw=true" width="150" />
 </h3>
 
 ## Technical stack
@@ -18,7 +18,7 @@ The subject were:
   - Compose (Material 3)
   - Hilt
   - Coroutines / Coroutines Tests
-  - Retrofit2
+  - Retrofit2 / Kotlin Serializer (Gson in first versions)
   - COIL
 
 ## Next upgrades possibilities
