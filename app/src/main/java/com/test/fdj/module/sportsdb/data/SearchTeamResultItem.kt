@@ -1,10 +1,12 @@
 package com.test.fdj.module.sportsdb.data
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class SearchTeamResultItem(
-    @SerializedName("strTeam")
+    @SerialName("strTeam")
     val name: String,
-    @SerializedName("strBadge")
+    @SerialName("strBadge")
     val teamBadge: String
 )

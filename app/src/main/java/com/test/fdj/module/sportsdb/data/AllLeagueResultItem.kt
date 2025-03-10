@@ -1,8 +1,10 @@
 package com.test.fdj.module.sportsdb.data
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class AllLeagueResultItem (
-    @SerializedName("strLeague")
+    @SerialName("strLeague")
     val leagueName: String,
 )

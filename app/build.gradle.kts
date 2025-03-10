@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
+    kotlin("plugin.serialization") version "1.9.22"
 }
 
 android {
@@ -84,9 +85,11 @@ dependencies {
 
     // Retrofit
     implementation("com.squareup.retrofit2:retrofit:$versionRetrofit")
-    // Retrofit with Gson converter
-    implementation("com.google.code.gson:gson")
-    implementation("com.squareup.retrofit2:converter-gson:$versionRetrofit")
+    // Retrofit with Kotlin serialization
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
+    implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+
     // Add Logs to Retrofit
     implementation(platform("com.squareup.okhttp3:okhttp-bom:$versionOkHTTP"))
     implementation("com.squareup.okhttp3:okhttp")
