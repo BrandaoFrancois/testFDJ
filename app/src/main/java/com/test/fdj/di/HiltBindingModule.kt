@@ -1,7 +1,7 @@
 package com.test.fdj.di
 
-import com.test.fdj.provider.SportsDataProviderSportsDBImpl
-import com.test.fdj.provider.SportsDataProvider
+import com.test.fdj.repository.SportsDataRepositorySportsDBImpl
+import com.test.fdj.repository.SportsDataRepository
 import com.test.fdj.usecase.GetLeaguesFilteredByUseCase
 import com.test.fdj.usecase.GetLeaguesFilteredByUseCaseImpl
 import com.test.fdj.usecase.GetOddTeamListForLeagueSortedAnalphabeticalyUseCase
@@ -15,7 +15,7 @@ import dagger.hilt.android.components.ViewModelComponent
 @InstallIn(ViewModelComponent::class)
 abstract class HiltBindingModule {
     @Binds
-    abstract fun bindSportsDataProvider(sportsDataProvider: SportsDataProviderSportsDBImpl) : SportsDataProvider
+    abstract fun bindSportsDataProvider(sportsDataProvider: SportsDataRepositorySportsDBImpl) : SportsDataRepository
 
     @Binds
     abstract fun bindGetOddTeamListForLeagueSortedAnalphabeticalyUseCaseImpl(getOddTeamListForLeagueSortedAnalphabeticalyUseCaseImpl: GetOddTeamListForLeagueSortedAnalphabeticalyUseCaseImpl) : GetOddTeamListForLeagueSortedAnalphabeticalyUseCase

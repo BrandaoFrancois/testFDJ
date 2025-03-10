@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.test.fdj.MainViewModel
-import com.test.fdj.provider.SportsDataProviderSportsDBImpl
+import com.test.fdj.repository.SportsDataRepositorySportsDBImpl
 import com.test.fdj.ui.items.SearchToolBar
 import com.test.fdj.data.TeamElement
 import com.test.fdj.ui.theme.TestFDJTheme
@@ -53,10 +53,10 @@ fun LeagueList(leaguePictures: State<List<TeamElement>>) {
 @Preview(showSystemUi = true)
 @Composable
 fun MainScreenPreview() {
-    val sportsDataProviderSportsDB = SportsDataProviderSportsDBImpl(Dispatchers.Default)
+    val sportsDataRepositorySportsDB = SportsDataRepositorySportsDBImpl(Dispatchers.Default)
     val viewModel = MainViewModel(
-        GetLeaguesFilteredByUseCaseImpl(sportsDataProviderSportsDB),
-        GetOddTeamListForLeagueSortedAnalphabeticalyUseCaseImpl(sportsDataProviderSportsDB)
+        GetLeaguesFilteredByUseCaseImpl(sportsDataRepositorySportsDB),
+        GetOddTeamListForLeagueSortedAnalphabeticalyUseCaseImpl(sportsDataRepositorySportsDB)
     )
 
     TestFDJTheme {

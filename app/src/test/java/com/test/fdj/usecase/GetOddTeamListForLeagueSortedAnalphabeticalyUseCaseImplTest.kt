@@ -1,7 +1,7 @@
 package com.test.fdj.usecase
 
 import com.test.fdj.data.TeamElement
-import com.test.fdj.provider.SportsDataProvider
+import com.test.fdj.repository.SportsDataRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
@@ -11,8 +11,8 @@ import org.junit.Assert
 import org.junit.Test
 
 class GetOddTeamListForLeagueSortedAnalphabeticalyUseCaseImplTest {
-    private val sportsDataProvider = object: SportsDataProvider {
-        override suspend fun provideTeamsOfLeague(leagueName: String): List<TeamElement> {
+    private val sportsDataRepository = object: SportsDataRepository {
+        override suspend fun getTeamsOfLeague(leagueName: String): List<TeamElement> {
             return listOf(
                 TeamElement("A", ""),
                 TeamElement("B", ""),
@@ -24,7 +24,7 @@ class GetOddTeamListForLeagueSortedAnalphabeticalyUseCaseImplTest {
             )
         }
 
-        override suspend fun provideLeagues(): List<String> {
+        override suspend fun getLeagues(): List<String> {
             return listOf(
                 "a",
                 "alpa",
@@ -44,7 +44,7 @@ class GetOddTeamListForLeagueSortedAnalphabeticalyUseCaseImplTest {
     fun testGettingOddTeamListForLeagueSortedAnalphabeticaly() = runTest {
         val leagueNameToTest = ""
         val testDispatcher = UnconfinedTestDispatcher(testScheduler)
-        val testUseCase = GetOddTeamListForLeagueSortedAnalphabeticalyUseCaseImpl(sportsDataProvider, testDispatcher)
+        val testUseCase = GetOddTeamListForLeagueSortedAnalphabeticalyUseCaseImpl(sportsDataRepository, testDispatcher)
         lateinit var resultToTestFormatted : String
 
         launch {

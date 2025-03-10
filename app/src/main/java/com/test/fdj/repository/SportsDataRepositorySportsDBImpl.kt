@@ -1,4 +1,4 @@
-package com.test.fdj.provider
+package com.test.fdj.repository
 
 import com.test.fdj.data.TeamElement
 import com.test.fdj.di.DefaultDispatcher
@@ -7,14 +7,14 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class SportsDataProviderSportsDBImpl @Inject constructor(
+class SportsDataRepositorySportsDBImpl @Inject constructor(
     @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher
-) : SportsDataProvider {
+) : SportsDataRepository {
     private val sportsDBService: SportsDBService by lazy {
         SportsDBService.create()
     }
 
-    override suspend fun provideTeamsOfLeague(leagueName: String): List<TeamElement> = withContext(defaultDispatcher) {
+    override suspend fun getTeamsOfLeague(leagueName: String): List<TeamElement> = withContext(defaultDispatcher) {
         return@withContext sportsDBService.searchTeams(leagueName).teams.map {searchTeamResultItem ->
             TeamElement(
                 name = searchTeamResultItem.name,
@@ -23,7 +23,7 @@ class SportsDataProviderSportsDBImpl @Inject constructor(
         }
     }
 
-    override suspend fun provideLeagues(): List<String> = withContext(defaultDispatcher) {
+    override suspend fun getLeagues(): List<String> = withContext(defaultDispatcher) {
         return@withContext sportsDBService.getListOfAllLeagues().leagues.map {leagueResultItem ->
             leagueResultItem.leagueName
         }
