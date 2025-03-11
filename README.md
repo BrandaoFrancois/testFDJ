@@ -21,6 +21,10 @@ The subject were:
   - Retrofit2 / Kotlin Serializer (Gson in first versions)
   - COIL
 
+## Quality
+
+[KTLint](https://github.com/pinterest/ktlint) approved !
+
 ## Next upgrades possibilities
 
   - Add a better error management for the User (Ex. Error message on UI or Toast)
