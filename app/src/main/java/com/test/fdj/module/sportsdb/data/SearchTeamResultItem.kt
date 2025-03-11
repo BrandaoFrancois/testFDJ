@@ -8,5 +8,5 @@ data class SearchTeamResultItem(
     @SerialName("strTeam")
     val name: String,
     @SerialName("strBadge")
-    val teamBadge: String
+    val teamBadge: String,
 )

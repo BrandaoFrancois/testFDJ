@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class AllLeagueResult (
+data class AllLeagueResult(
     @SerialName("leagues")
-    val leagues: List<AllLeagueResultItem>
+    val leagues: List<AllLeagueResultItem>,
 )

@@ -16,54 +16,56 @@ import java.io.IOException
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(
-    private val getLeaguesFilteredByUseCase: GetLeaguesFilteredByUseCase,
-    private val getOddTeamListForLeagueSortedAnalphabeticalyUseCase: GetOddTeamListForLeagueSortedAnalphabeticalyUseCase
-): ViewModel() {
-    companion object {
-        val TAG_NAME = MainViewModel::class.simpleName
-    }
+class MainViewModel
+    @Inject
+    constructor(
+        private val getLeaguesFilteredByUseCase: GetLeaguesFilteredByUseCase,
+        private val getOddTeamListForLeagueSortedAnalphabeticalyUseCase: GetOddTeamListForLeagueSortedAnalphabeticalyUseCase,
+    ) : ViewModel() {
+        companion object {
+            val TAG_NAME = MainViewModel::class.simpleName
+        }
 
-    private val _leagues: MutableState<List<String>> = mutableStateOf(listOf())
-    val leagues: State<List<String>> get() = _leagues
+        private val _leagues: MutableState<List<String>> = mutableStateOf(listOf())
+        val leagues: State<List<String>> get() = _leagues
 
-    private val _teams: MutableState<List<TeamElement>> = mutableStateOf(listOf())
-    val teams: State<List<TeamElement>> get() = _teams
+        private val _teams: MutableState<List<TeamElement>> = mutableStateOf(listOf())
+        val teams: State<List<TeamElement>> get() = _teams
 
-    private val _isTeamsVisible: MutableState<Boolean> = mutableStateOf(false)
-    val isTeamsVisible: State<Boolean> get() = _isTeamsVisible
+        private val _isTeamsVisible: MutableState<Boolean> = mutableStateOf(false)
+        val isTeamsVisible: State<Boolean> get() = _isTeamsVisible
 
-    val searchLabelText: MutableState<String> = mutableStateOf("")
+        val searchLabelText: MutableState<String> = mutableStateOf("")
 
-    private var updateLeaguesJob: Job? = null
+        private var updateLeaguesJob: Job? = null
 
-    fun updateLeagues(input: String) {
-        updateLeaguesJob?.cancel()
-        updateLeaguesJob = viewModelScope.launch {
-            try {
-                val leagues: List<String> = getLeaguesFilteredByUseCase.execute(input)
+        fun updateLeagues(input: String) {
+            updateLeaguesJob?.cancel()
+            updateLeaguesJob =
+                viewModelScope.launch {
+                    try {
+                        val leagues: List<String> = getLeaguesFilteredByUseCase.execute(input)
 
-                _leagues.value = leagues
-                _isTeamsVisible.value = false
-            } catch(exception: IOException) {
-                Log.e(TAG_NAME, "Error during updating leagues: ${exception.message}")
-                // TODO Faire quelque chose
+                        _leagues.value = leagues
+                        _isTeamsVisible.value = false
+                    } catch (exception: IOException) {
+                        Log.e(TAG_NAME, "Error during updating leagues: ${exception.message}")
+                        // TODO Faire quelque chose
+                    }
+                }
+        }
+
+        fun selectLeague(leagueName: String) {
+            viewModelScope.launch {
+                try {
+                    val teamsElement: List<TeamElement> = getOddTeamListForLeagueSortedAnalphabeticalyUseCase.execute(leagueName)
+
+                    _teams.value = teamsElement // A mettre sur la Main Thread
+                    _isTeamsVisible.value = true
+                } catch (exception: IOException) {
+                    Log.e(TAG_NAME, "Error during selecting a league: ${exception.message}")
+                    // TODO Faire quelque chose
+                }
             }
         }
     }
-
-    fun selectLeague(leagueName: String) {
-        viewModelScope.launch {
-            try {
-                val teamsElement: List<TeamElement> = getOddTeamListForLeagueSortedAnalphabeticalyUseCase.execute(leagueName)
-
-                _teams.value = teamsElement // A mettre sur la Main Thread
-                _isTeamsVisible.value = true
-
-            } catch(exception: IOException) {
-                Log.e(TAG_NAME, "Error during selecting a league: ${exception.message}")
-                // TODO Faire quelque chose
-            }
-        }
-    }
-}

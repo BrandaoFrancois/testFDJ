@@ -36,7 +36,7 @@ class GetOddTeamListForLeagueSortedAnalphabeticalyUseCaseImplTest {
                     "England",
                     "ENgland",
                 )
-    }
+        }
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test

@@ -1,5 +1,6 @@
 package com.test.fdj.ui.items
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -30,15 +31,16 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import com.test.fdj.R
-import com.test.fdj.ui.theme.TestFDJTheme
+import com.test.fdj.ui.theme.testFDJTheme
 
+@SuppressLint("ComposableNaming")
 @Composable
-fun SearchToolBar(
+fun searchToolBar(
     categories: State<List<String>>,
     text: MutableState<String>,
     onCategoriesUpdateNeeded: (String) -> Unit = {},
     onSelectCategory: (String) -> Unit = {},
-    autoCompleteDefaultValue: Boolean = false
+    autoCompleteDefaultValue: Boolean = false,
 ) {
     var isAutoCompleteVisible by remember { mutableStateOf(autoCompleteDefaultValue) }
     val focusManager = LocalFocusManager.current
@@ -52,24 +54,27 @@ fun SearchToolBar(
                 onCategoriesUpdateNeeded(it)
                 isAutoCompleteVisible = true
             },
-            label= { Text(stringResource(id = ( R.string.searchtool_label ))) },
+            label = { Text(stringResource(id = (R.string.searchtool_label))) },
             leadingIcon = { Icon(Icons.Filled.Search, contentDescription = null) },
-            trailingIcon = { IconButton(onClick = {
-                    text.value = ""
-                    focusRequester.requestFocus()
-                }) {
-                Icon(Icons.Filled.Clear, contentDescription = null)
-            }},
-            modifier = Modifier
-                .fillMaxWidth()
-                .onFocusChanged {
-                    if (it.hasFocus) {
-                        onCategoriesUpdateNeeded(text.value)
-                        isAutoCompleteVisible = true
+            trailingIcon =
+                {
+                    IconButton(onClick = {
+                        text.value = ""
+                        focusRequester.requestFocus()
+                    }) {
+                        Icon(Icons.Filled.Clear, contentDescription = null)
                     }
-                }
-                .focusRequester(focusRequester),
-            singleLine = true
+                },
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .onFocusChanged {
+                        if (it.hasFocus) {
+                            onCategoriesUpdateNeeded(text.value)
+                            isAutoCompleteVisible = true
+                        }
+                    }.focusRequester(focusRequester),
+            singleLine = true,
         )
         if (isAutoCompleteVisible) {
             LazyColumn {
@@ -81,34 +86,41 @@ fun SearchToolBar(
                             onSelectCategory(category)
                             isAutoCompleteVisible = false
                             focusManager.clearFocus()
-                          },
-                        modifier = Modifier
-                            .padding(
-                                horizontal = Dp(10f),
-                                vertical = Dp(12f)
-                            )
-                            .fillMaxWidth())
+                        },
+                        modifier =
+                            Modifier
+                                .padding(
+                                    horizontal = Dp(10f),
+                                    vertical = Dp(12f),
+                                ).fillMaxWidth(),
+                    )
                 }
             }
         }
     }
 }
 
+@SuppressLint("ComposableNaming")
 @Preview(showBackground = true)
 @Composable
-fun SearchToolBarPreview() {
-    val exampleList = remember { mutableStateOf(listOf(
-        "Solution 1",
-        "Solution 2",
-        "Solution 3"
-    )) }
+fun searchToolBarPreview() {
+    val exampleList =
+        remember {
+            mutableStateOf(
+                listOf(
+                    "Solution 1",
+                    "Solution 2",
+                    "Solution 3",
+                ),
+            )
+        }
     val text = remember { mutableStateOf("") }
 
-    TestFDJTheme {
-        SearchToolBar(
+    testFDJTheme {
+        searchToolBar(
             categories = exampleList,
             text = text,
-            autoCompleteDefaultValue = true
+            autoCompleteDefaultValue = true,
         )
     }
 }

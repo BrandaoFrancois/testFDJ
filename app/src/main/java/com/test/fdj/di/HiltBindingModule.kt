@@ -1,7 +1,7 @@
 package com.test.fdj.di
 
-import com.test.fdj.repository.SportsDataRepositorySportsDBImpl
 import com.test.fdj.repository.SportsDataRepository
+import com.test.fdj.repository.SportsDataRepositorySportsDBImpl
 import com.test.fdj.usecase.GetLeaguesFilteredByUseCase
 import com.test.fdj.usecase.GetLeaguesFilteredByUseCaseImpl
 import com.test.fdj.usecase.GetOddTeamListForLeagueSortedAnalphabeticalyUseCase
@@ -18,9 +18,9 @@ abstract class HiltBindingModule {
     abstract fun bindSportsDataProvider(sportsDataProvider: SportsDataRepositorySportsDBImpl): SportsDataRepository
 
     @Binds
-    abstract fun bindGetOddTeamListForLeagueSortedAnalphabeticalyUseCaseImpl
-                (getOddTeamListForLeagueSortedAnalphabeticalyUseCaseImpl: GetOddTeamListForLeagueSortedAnalphabeticalyUseCaseImpl)
-    : GetOddTeamListForLeagueSortedAnalphabeticalyUseCase
+    abstract fun bindGetOddTeamListForLeagueSortedAnalphabeticalyUseCaseImpl(
+        getOddTeamListForLeagueSortedAnalphabeticalyUseCaseImpl: GetOddTeamListForLeagueSortedAnalphabeticalyUseCaseImpl,
+    ): GetOddTeamListForLeagueSortedAnalphabeticalyUseCase
 
     @Binds
     abstract fun bindGetLeaguesFilteredByUseCase(getLeaguesFilteredByUseCase: GetLeaguesFilteredByUseCaseImpl): GetLeaguesFilteredByUseCase

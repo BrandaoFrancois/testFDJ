@@ -1,5 +1,6 @@
 package com.test.fdj.ui
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -14,52 +15,58 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.test.fdj.MainViewModel
-import com.test.fdj.repository.SportsDataRepositorySportsDBImpl
-import com.test.fdj.ui.items.SearchToolBar
 import com.test.fdj.data.TeamElement
-import com.test.fdj.ui.theme.TestFDJTheme
+import com.test.fdj.repository.SportsDataRepositorySportsDBImpl
+import com.test.fdj.ui.items.searchToolBar
+import com.test.fdj.ui.theme.testFDJTheme
 import com.test.fdj.usecase.GetLeaguesFilteredByUseCaseImpl
 import com.test.fdj.usecase.GetOddTeamListForLeagueSortedAnalphabeticalyUseCaseImpl
 import kotlinx.coroutines.Dispatchers
 
+@SuppressLint("ComposableNaming")
 @Composable
-fun MainScreen(
-    viewModel: MainViewModel = hiltViewModel()
-) {
+fun mainScreen(viewModel: MainViewModel = hiltViewModel()) {
     Column {
-        SearchToolBar(
+        searchToolBar(
             categories = viewModel.leagues,
             onCategoriesUpdateNeeded = { input -> viewModel.updateLeagues(input) },
             onSelectCategory = { categorySelected -> viewModel.selectLeague(categorySelected) },
-            text = viewModel.searchLabelText
+            text = viewModel.searchLabelText,
         )
         if (viewModel.isTeamsVisible.value) {
-            LeagueList(viewModel.teams)
+            leagueList(viewModel.teams)
         }
     }
 }
 
+@SuppressLint("ComposableNaming")
 @Composable
-fun LeagueList(leaguePictures: State<List<TeamElement>>) {
+fun leagueList(leaguePictures: State<List<TeamElement>>) {
     LazyVerticalGrid(
-        columns = GridCells.Adaptive(minSize = 128.dp)
+        columns = GridCells.Adaptive(minSize = 128.dp),
     ) {
         items(leaguePictures.value) { leaguePicture ->
-            AsyncImage(model = leaguePicture.pictureURL, contentDescription = leaguePicture.name, modifier = Modifier.padding(Dp(6f)))
+            AsyncImage(
+                model = leaguePicture.pictureURL,
+                contentDescription = leaguePicture.name,
+                modifier = Modifier.padding(Dp(6f)),
+            )
         }
     }
 }
 
 @Preview(showSystemUi = true)
+@SuppressLint("ComposableNaming")
 @Composable
-fun MainScreenPreview() {
+fun mainScreenPreview() {
     val sportsDataRepositorySportsDB = SportsDataRepositorySportsDBImpl(Dispatchers.Default)
-    val viewModel = MainViewModel(
-        GetLeaguesFilteredByUseCaseImpl(sportsDataRepositorySportsDB),
-        GetOddTeamListForLeagueSortedAnalphabeticalyUseCaseImpl(sportsDataRepositorySportsDB)
-    )
+    val viewModel =
+        MainViewModel(
+            GetLeaguesFilteredByUseCaseImpl(sportsDataRepositorySportsDB),
+            GetOddTeamListForLeagueSortedAnalphabeticalyUseCaseImpl(sportsDataRepositorySportsDB),
+        )
 
-    TestFDJTheme {
-        MainScreen(viewModel)
+    testFDJTheme {
+        mainScreen(viewModel)
     }
 }

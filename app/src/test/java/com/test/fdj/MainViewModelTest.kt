@@ -16,12 +16,14 @@ import java.io.IOException
 class MainViewModelTest {
     private val crashGetOddUseCase =
         object : GetOddTeamListForLeagueSortedAnalphabeticalyUseCase {
-            override suspend fun execute(leagueName: String): List<TeamElement> = throw IOException("No no ! Not working today ! Come tomorrow !")
+            override suspend fun execute(leagueName: String): List<TeamElement> =
+                throw IOException("No no ! Not working today ! Come tomorrow !")
         }
 
     private val crashGetLeaguesUseCase =
         object : GetLeaguesFilteredByUseCase {
-            override suspend fun execute(input: String): List<String> = throw IOException("No no ! Still not working today ! Come tomorrow !")
+            override suspend fun execute(input: String): List<String> =
+                throw IOException("No no ! Still not working today ! Come tomorrow !")
         }
 
     private val emptyGetOddUseCase =

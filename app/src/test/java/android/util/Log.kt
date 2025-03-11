@@ -2,6 +2,7 @@
 
 package android.util
 
-fun e(tag: String, msg: String): Int {
-    return 0
-}
+fun e(
+    tag: String,
+    msg: String,
+): Int = 0

@@ -18,23 +18,26 @@ interface SportsDBService {
 
     @GET("$API_KEY/search_all_teams.php")
     suspend fun searchTeams(
-        @Query("l") leagueNameFilter: String
-    ) : SearchTeamResult
+        @Query("l") leagueNameFilter: String,
+    ): SearchTeamResult
 
     companion object {
         private const val BASE_URL = BuildConfig.SPORTSDB_BASE_URL
         private const val API_KEY = BuildConfig.SPORTSDB_API_KEY
 
-        fun create() : SportsDBService {
+        fun create(): SportsDBService {
             val logger = HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC }
 
-            val client = OkHttpClient.Builder()
-                .addInterceptor(logger)
-                .build()
+            val client =
+                OkHttpClient
+                    .Builder()
+                    .addInterceptor(logger)
+                    .build()
 
             val networkJson = Json { ignoreUnknownKeys = true }
 
-            return Retrofit.Builder()
+            return Retrofit
+                .Builder()
                 .client(client)
                 .baseUrl(BASE_URL)
                 .addConverterFactory(networkJson.asConverterFactory("application/json".toMediaType()))
