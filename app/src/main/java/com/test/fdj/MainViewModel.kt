@@ -12,6 +12,7 @@ import com.test.fdj.usecase.GetOddTeamListForLeagueSortedAnalphabeticalyUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
 
@@ -48,9 +49,15 @@ class MainViewModel
 
                         _leagues.value = leagues
                         _isTeamsVisible.value = false
+                    } catch (exception: HttpException) {
+                        Log.e(TAG_NAME, "Error trying to access API: ${exception.code()}")
+                        // TODO Mise en place d'un Toast d'erreur ici
                     } catch (exception: IOException) {
                         Log.e(TAG_NAME, "Error during updating leagues: ${exception.message}")
-                        // TODO Faire quelque chose
+                        // TODO Mise en place d'un Toast d'erreur ici
+                    } catch (exception: Exception) {
+                        Log.e(TAG_NAME, "An error occurred: ${exception.message}")
+                        // TODO Mise en place d'un Toast d'erreur ici
                     }
                 }
         }
@@ -62,9 +69,15 @@ class MainViewModel
 
                     _teams.value = teamsElement // A mettre sur la Main Thread
                     _isTeamsVisible.value = true
+                } catch (exception: HttpException) {
+                    Log.e(TAG_NAME, "Error trying to access API: ${exception.code()}")
+                    // TODO Mise en place d'un Toast d'erreur ici
                 } catch (exception: IOException) {
                     Log.e(TAG_NAME, "Error during selecting a league: ${exception.message}")
-                    // TODO Faire quelque chose
+                    // TODO Mise en place d'un Toast d'erreur ici
+                } catch (exception: Exception) {
+                    Log.e(TAG_NAME, "An error occurred: ${exception.message}")
+                    // TODO Mise en place d'un Toast d'erreur ici
                 }
             }
         }
