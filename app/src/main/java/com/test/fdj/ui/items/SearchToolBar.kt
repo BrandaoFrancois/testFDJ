@@ -28,8 +28,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
@@ -81,6 +84,8 @@ fun searchToolBar(
             singleLine = true,
         )
         if (isAutoCompleteVisible) {
+            val ctx = LocalContext.current
+
             LazyColumn {
                 items(categories.value) { category ->
                     ClickableText(
@@ -93,6 +98,9 @@ fun searchToolBar(
                         },
                         modifier =
                             Modifier
+                                .semantics {
+                                    contentDescription = ctx.getString(R.string.league_contentDescription, category)
+                                }
                                 .defaultMinSize(minHeight = 48.dp)
                                 .wrapContentHeight(align = Alignment.CenterVertically)
                                 .padding(
